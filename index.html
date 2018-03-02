@@ -18,55 +18,96 @@
 
 <body>
 
-
-
-
+    <div class="game-container">
+        <div>
+            <span id="game"></span>
+        </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <script type="text/javascript">
-        var triviaArray = {
-            question1: {
-                Q: "Which of the following is not a valid statement during an airplane crisis?",
-                A1: ["I guess I picked the wrong day to quit snorting coke", false],
-                A2: ["I guess I picked the wrong day to quit sniffing glue", true],
-                A3: ["I guess I picked the wrong day to quit smoking crack", false],
-                A4: ["I guess I picked the wrong day to quit huffing paint", false]
+        var currentQuestion = document.getElementById("game");
+        var wins = 0;
+        var losses = 0;
+        var gameContainer = document.getElementById('game');
+        var triviaArray = [{
+                question: "Which of the following is not utterred in the classic film 'Airplane!'?",
+                answers: {
+                    a: "I guess I picked the wrong day to quit drinking",
+                    b: "I guess I picked the wrong day to quit huffing paint",
+                    c: "I guess I picked the wrong day to quit sniffing glue",
+                    d: "I guess I picked the wrong day to quit methamphetamines"
+                },
+                correctAnswer: "b"
             },
-            question2: {
-                Q: "Which of the following was not directed by Peter Jackson?",
-                A1: ["Bad Taste", false],
-                A2: ["Meet the Feebles", false],
-                A3: ["Heavenly Creatures", false],
-                A4: ["The Sloths", true]
+            {
+                question: "Which of the following films was not directed by Peter Jackson?",
+                answers: {
+                    a: "Bad Taste",
+                    b: "Meet the Feebles",
+                    c: "Heavenly Creatures",
+                    d: "The Sloths"
+                },
+                correctAnswer: "d"
             },
-            question3: {
-                Q: "Which of the following was not one of the monster 'ghosts' in the arcade game Ms. Pac-Man?",
-                A1: ["Rocky", true],
-                A2: ["Blinky", false],
-                A3: ["Pinky", false],
-                A4: ["Sue", false]
+            {
+                question: "Which of the following was not one of the monster 'ghosts' in the arcade game Ms. Pac-Man?",
+                answers: {
+                    a: "Rocky",
+                    b: "Blinky",
+                    c: "Pinky",
+                    d: "Sue"
+                },
+                correctAnswer: "a"
             },
-            question4: {
-                Q: "Which of the following is not an actual breed of dog?",
-                A1: ["snickerdoodle", true],
-                A2: ["labradoodle", false],
-                A3: ["cockapoo", false],
-                A4: ["goldendoodle", false]
+            {
+                question: "Which of the following is not an actual breed of dog?",
+                answers: {
+                    a: "snickerdoodle",
+                    b: "labradoodle",
+                    c: "cockapoo",
+                    d: "goldendoodle"
+                },
+                correctAnswer: "a"
             },
-            question5: {
-                Q: "Which of the following were not actual models of AMC cars?",
-                A1: ["Javelin", false],
-                A2: ["Gremlin", false],
-                A3: ["Machete", true],
-                A4: ["Hornet", false]
-            },
-        }
+            {
+                question: "Which of the following was not an actual AMC car model?",
+                answers: {
+                    a: "Javelin",
+                    b: "Gremlin",
+                    c: "Machete",
+                    d: "Hornet"
+                },
+                correctAnswer: "c"
+            }
+        ];
 
         function renderQandA() {
 
+            var display = [];
 
-
+            triviaArray.forEach((currentQuestion, questionNumber) => {
+                var answers = [];
+                for (letter in currentQuestion.answers) {
+                    answers.push(
+                        `<label> <input type="radio" name="question${questionNumber}" value="${letter}">
+            ${letter}:
+            ${currentQuestion.answers[letter]}
+            </label>`
+                    );
+                }
+                display.push(
+                    `<div class="question">
+                    ${currentQuestion.question} </div>
+                    <div class="answers"> ${answers.join('')} </div>`
+                );
+            });
+            gameContainer.innerHTML = display.join('');
         }
+
+        // function showResults() {}
+
+        renderQandA();
     </script>
 
 
